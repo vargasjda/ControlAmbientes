@@ -2,7 +2,7 @@ let mongoose = require('mongoose');
 
 let inventarioSchema = new mongoose.Schema({
     objeto: String, 
-    cantidad: int,
+    cantidad: Number,
     datos: String,
     descripcion: String 
    
