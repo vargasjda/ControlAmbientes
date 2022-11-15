@@ -1,31 +1,31 @@
-let mongo_bloque = require('../models/bloques');
+let mongo_inventario = require('../models/inventario');
 
-function getBloques(request, response){
-    mongo_bloque.find().exec((err, bloques) => {
+function getInventarios(request, response){
+    mongo_inventario.find().exec((err, inventarios) => {
         if (err) {
             console.log("Error Busqueda");
-        }else if(bloques != 0){
-            return response.send(bloques)
+        }else if(inventarios != 0){
+            return response.send(inventarios)
         }else{
-            return response.send("Bloques Vacios")
+            return response.send("inventarios Vacios")
         }
     })
 }
 
-function createBloque(request, response){
+function createInventario(request, response){
     var body = request.body; 
        
-    mongo_bloque.find(body).exec()
-    .then((bloque)=>{
-        if(bloque){
-            if(bloque.length>0){
-                return response.send( 'BLOQUE YA EXISTENTE' );
+    mongo_inventario.find(body).exec()
+    .then((inventario)=>{
+        if(inventario){
+            if(inventario.length>0){
+                return response.send( 'INVENTARIO YA EXISTENTE' );
             }else{  
-                mongo_bloque.insertMany(body, (err, result) => {
+                mongo_inventario.insertMany(body, (err, result) => {
                     if(result){
                         return response.status(201).send(result);
                     }else{
-                        return response.status(204).send( 'ERROR AL INSERTAR BLOQUE' );
+                        return response.status(204).send( 'ERROR AL INSERTAR INVENTARIO' );
                     } 
                 });
             }
@@ -35,14 +35,14 @@ function createBloque(request, response){
     }).catch(err => console.log("error:", err))
 }
 
-function updateBloque(request, response) {
+function updateInventario(request, response) {
     var body = request.body;
     var filter = {};
         if(request.params.id == null ){
             return response.send({ code: 'CAMPOS_ERROR', description: 'Campo Obligatorio' });
         }else{
             filter.id = request.params.id ;
-            mongo_bloque.findOneAndUpdate(
+            mongo_inventario.findOneAndUpdate(
                 { "_id":filter.id}, 
                 { $set: 
                     { ...body  } 
@@ -52,36 +52,36 @@ function updateBloque(request, response) {
                 if (result) {
                     response.send(  'Se actualizo correctamente'  );
                 } else {
-                    response.status(400).send({ code: 'bloque_ERROR ', description: 'Verifique bloque' });
+                    response.status(400).send({ code: 'inventario_ERROR ', description: 'Verifique inventario' });
                 }
             }).catch(function (err) {
-                return response.send({ code: 'POST_Suggestedbloque_ERROR', description: err.toString() });
+                return response.send({ code: 'POST_Suggestedinventario_ERROR', description: err.toString() });
             });
     }
 }
 
-function deleteBloque(request, response) {
+function deleteInventario(request, response) {
     var filter = {};
     if (request.params.id) {
         filter._id = request.params.id;
     }
-    mongo_bloque.findOneAndRemove(filter, (err, result) => {
+    mongo_inventario.findOneAndRemove(filter, (err, result) => {
         if (err) {
             console.log(err);
             response.send( 'error al conectar' );
         }
         if (result) {
-            return response.send({ title: "SUCCESSFUL", description: "Bloque Eliminado" });
+            return response.send({ title: "SUCCESSFUL", description: "inventario Eliminado" });
         } else {
-            return response.send({ code: 'DELETE_ERROR ', description: 'Verifique Usuario' });
+            return response.send({ code: 'DELETE_ERROR ', description: 'Verifique inventario' });
         }
     });
 }
 
 module.exports ={
-    getBloques,
-    createBloque,
-    updateBloque,
-    deleteBloque
+    getInventarios,
+    createInventario,
+    updateInventario,
+    deleteInventario
       
 } 

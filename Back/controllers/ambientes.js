@@ -1,31 +1,31 @@
-let mongo_bloque = require('../models/bloques');
+let mongo_ambiente = require('../models/ambientes');
 
-function getBloques(request, response){
-    mongo_bloque.find().exec((err, bloques) => {
+function getAmbientes(request, response){
+    mongo_ambiente.find().exec((err, ambientes) => {
         if (err) {
             console.log("Error Busqueda");
-        }else if(bloques != 0){
-            return response.send(bloques)
+        }else if(ambientes != 0){
+            return response.send(ambientes)
         }else{
-            return response.send("Bloques Vacios")
+            return response.send("ambientes Vacios")
         }
     })
 }
 
-function createBloque(request, response){
+function createAmbiente(request, response){
     var body = request.body; 
        
-    mongo_bloque.find(body).exec()
-    .then((bloque)=>{
-        if(bloque){
-            if(bloque.length>0){
-                return response.send( 'BLOQUE YA EXISTENTE' );
+    mongo_ambiente.find(body).exec()
+    .then((ambiente)=>{
+        if(ambiente){
+            if(ambiente.length>0){
+                return response.send( 'AMBIENTE YA EXISTENTE' );
             }else{  
-                mongo_bloque.insertMany(body, (err, result) => {
+                mongo_ambiente.insertMany(body, (err, result) => {
                     if(result){
                         return response.status(201).send(result);
                     }else{
-                        return response.status(204).send( 'ERROR AL INSERTAR BLOQUE' );
+                        return response.status(204).send( 'ERROR AL INSERTAR ambiente' );
                     } 
                 });
             }
@@ -35,14 +35,14 @@ function createBloque(request, response){
     }).catch(err => console.log("error:", err))
 }
 
-function updateBloque(request, response) {
+function updateAmbiente(request, response) {
     var body = request.body;
     var filter = {};
         if(request.params.id == null ){
             return response.send({ code: 'CAMPOS_ERROR', description: 'Campo Obligatorio' });
         }else{
             filter.id = request.params.id ;
-            mongo_bloque.findOneAndUpdate(
+            mongo_ambiente.findOneAndUpdate(
                 { "_id":filter.id}, 
                 { $set: 
                     { ...body  } 
@@ -52,36 +52,35 @@ function updateBloque(request, response) {
                 if (result) {
                     response.send(  'Se actualizo correctamente'  );
                 } else {
-                    response.status(400).send({ code: 'bloque_ERROR ', description: 'Verifique bloque' });
+                    response.status(400).send({ code: 'ambiente_ERROR ', description: 'Verifique ambiente' });
                 }
             }).catch(function (err) {
-                return response.send({ code: 'POST_Suggestedbloque_ERROR', description: err.toString() });
+                return response.send({ code: 'POST_Suggestedambiente_ERROR', description: err.toString() });
             });
     }
 }
 
-function deleteBloque(request, response) {
+function deleteAmbiente(request, response) {
     var filter = {};
     if (request.params.id) {
         filter._id = request.params.id;
     }
-    mongo_bloque.findOneAndRemove(filter, (err, result) => {
+    mongo_ambiente.findOneAndRemove(filter, (err, result) => {
         if (err) {
             console.log(err);
             response.send( 'error al conectar' );
         }
         if (result) {
-            return response.send({ title: "SUCCESSFUL", description: "Bloque Eliminado" });
+            return response.send({ title: "SUCCESSFUL", description: "ambiente Eliminado" });
         } else {
-            return response.send({ code: 'DELETE_ERROR ', description: 'Verifique Usuario' });
+            return response.send({ code: 'DELETE_ERROR ', description: 'Verifique AMBIENTE' });
         }
     });
 }
 
 module.exports ={
-    getBloques,
-    createBloque,
-    updateBloque,
-    deleteBloque
-      
+    getAmbientes,
+    createAmbiente,
+    updateAmbiente,
+    deleteAmbiente
 } 
