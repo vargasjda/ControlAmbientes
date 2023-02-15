@@ -1,8 +1,8 @@
 {
-  "name": "coffee-sell-api",
-  "description": "API Coffee Sell",
+  "name": "control-ambientes",
+  "description": "API Control Ambientes",
   "version": "0.0.1",
-  "author": "Natalia Bernal",
+  "author": "",
   "private": true,
   "dependencies": {
     "basic-auth": "^2.0.1",

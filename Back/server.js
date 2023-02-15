@@ -22,14 +22,17 @@ app.use(cors());
 // Use Control Routes
 app.use('/app', ControlRoutes);
 
-
-
 // Use Rekognition API
 let port = process.env.PORT || 8081;
 
 //mongo connect
-
-mongoose.connect('mongodb://localhost:27017/ControlAmbientes');
+const uri = "mongodb://mongoadmin:admin123@localhost:27017/?authMechanism=DEFAULT";
+//mongoose.connect(uri);
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Conectado a la base de datos');
+  })
+  .catch(err => console.error('Error al conectar a la base de datos', err));
 
 app.listen(port, function (){
     console.log("Server Port "+ port);
