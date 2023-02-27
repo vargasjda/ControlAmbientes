@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>home</title>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" type="text/javascript"></script>   
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <header class="header">
@@ -21,7 +22,8 @@
  
             </ul>            
          </nav>
-        <a class="btn" href="#"><button>cerrar sesion</button></a>
+         <div><label>Bienvenido: </label><label id="user"></label></div>
+        <a class="btn" href="#"><button onclick="closeSession()">cerrar sesion</button></a>
     </header>
 </head>
 <body>
@@ -36,7 +38,11 @@
 
         
     </form>
-    
+    <script>
+        $( document ).ready(function() {
+            validateSession();
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
