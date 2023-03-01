@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const logger = require('morgan');
 const methodOverride = require('method-override');
 const cors = require('cors');
+const session = require('express-session');
 
 
 app.use(logger('dev'));
@@ -14,6 +15,17 @@ app.use(
         extended: false
     })
 );
+
+app.use(session({
+    secret: 'RPvACp7kfkzBswd1',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true,
+        maxAge: 60000
+    }
+}));
+
 app.use(bodyParser.json());
 
 app.use(methodOverride());

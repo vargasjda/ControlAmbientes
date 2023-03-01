@@ -14,7 +14,7 @@ function getNovedades(request, response){
 
 function createNovedad(request, response){
     var body = request.body; 
-       
+    console.log(body) ;  
     mongo_novedad.find(body).exec()
     .then((novedad)=>{
         if(novedad){
@@ -23,9 +23,12 @@ function createNovedad(request, response){
             }else{  
                 mongo_novedad.insertMany(body, (err, result) => {
                     if(result){
+                        console.log(result)
                         return response.status(201).send(result);
+                        
                     }else{
-                        return response.status(204).send( 'ERROR AL INSERTAR NOVEDAD' );
+                        console.log(err)
+                        return response.status(204).send({"error": 'ERROR AL INSERTAR NOVEDAD' });
                     } 
                 });
             }

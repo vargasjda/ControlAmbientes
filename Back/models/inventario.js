@@ -1,6 +1,7 @@
 let mongoose = require('mongoose');
 
 let inventarioSchema = new mongoose.Schema({
+    
     objeto: String, 
     cantidad: Number,
     datos: String,

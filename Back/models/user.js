@@ -2,8 +2,9 @@ let mongoose = require('mongoose');
 
 let UserSchema = new mongoose.Schema({
     userName: String, 
-    password: String, 
-    rol: String, 
+    correo:String,
+    rol: String,
+    password: String,
     branchId: String, 
     enabled: Boolean
   }, { versionKey: false });

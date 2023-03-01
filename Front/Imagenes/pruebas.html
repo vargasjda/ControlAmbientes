@@ -1,0 +1,48 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ejemplo de formulario con Node.js</title>
+</head>
+<body>
+  <h1>Formulario de ejemplo</h1>
+  <form action="/" method="POST">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required>
+    <br>
+    <label for="email">Correo electrónico:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+    <div id="nuevos-campos"></div>
+    <button id="agregar-campo" type="button">Agregar Campo</button>
+    <br>
+    <button type="submit">Enviar</button>
+  </form>
+  
+  <script >
+    // Importa el módulo "http" de Node.js
+const http = require('http');
+
+// Crea una función que se llamará cada vez que se haga clic en el botón "Agregar Campo"
+function agregarCampo() {
+  // Crea un nuevo elemento input
+  var nuevoCampo = document.createElement("input");
+
+  // Configura el tipo de campo como texto
+  nuevoCampo.type = "text";
+
+  // Agrega el campo al div de nuevos campos
+  var nuevosCampos = document.getElementById("nuevos-campos");
+  nuevosCampos.appendChild(nuevoCampo);
+
+  // Agrega un salto de línea para separar los campos
+  nuevosCampos.appendChild(document.createElement("br"));
+}
+
+// Agrega un event listener al botón "Agregar Campo"
+var botonAgregarCampo = document.getElementById("agregar-campo");
+botonAgregarCampo.addEventListener("click", agregarCampo);
+  </script>
+  
+</body>
+</html> -->
