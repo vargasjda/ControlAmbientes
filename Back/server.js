@@ -38,7 +38,7 @@ app.use('/app', ControlRoutes);
 let port = process.env.PORT || 8081;
 
 //mongo connect
-const uri = "mongodb://mongoadmin:admin123@localhost:27017/?authMechanism=DEFAULT";
+const uri = "mongodb://localhost:27017"
 //mongoose.connect(uri);
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {

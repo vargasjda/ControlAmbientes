@@ -4,7 +4,7 @@ function loginUser(request, response){
     var body = request.body;
     var filter = {};
     if (body.username && body.password) {
-        filter.userName = body.username;
+        filter.email = body.username;
         filter.password = body.password;
     }else{
         return response.send({ code: 'CAMPO_ERROR', description: 'Campo Obligatorio' });

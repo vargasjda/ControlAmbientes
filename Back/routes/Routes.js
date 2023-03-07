@@ -17,15 +17,7 @@ const app = express.Router();
  
 // Login
 app.post('/login', login.loginUser);
-app.get("/users", (req, res) => {
-    
-    if(!req.session.correo){
-      res.end("No tienes permiso. Fuera de aquí");
-    }else{
-      
-      res.end("Hola " + req.session.nombre);
-    }
-  });
+
 
 // User
 app.get('/users', user.getUsers);

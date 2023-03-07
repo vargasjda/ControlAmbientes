@@ -23,7 +23,7 @@ $( "#formCreateUser" ).submit(function( event ) {
         if(this.name != "") values[this.name] = $(this).val();
     });
     values.branchId = "1";
-    delete values.email;
+    
     fetch(url + "users", {
         method: 'POST',
         headers: {
@@ -108,7 +108,8 @@ $( "#formLogin" ).submit(function( event ) {
           console.log(data)
           if(data.status){
             sessionStorage.setItem("name", data.user.userName);
-            location.href = "http://localhost:8080/interfaces/home.html";
+            sessionStorage.setItem("rol", data.user.rol);
+            location.href = "http://127.0.0.1:5501/ControlAmbientes/Front/interfaces/home.html";
           }
           else{
             sessionStorage.setItem("name", null);
@@ -122,21 +123,22 @@ function validateSession(){
   let user = sessionStorage.getItem("name");
   if(user){
       console.log( "Welcome! " +  user);
+      console.log(sessionStorage.getItem("rol"));
       $("#user").text(user);
   }
   else{
       sessionStorage.clear();
-      location.href = "http://localhost:8080/interfaces/login.html";
+      location.href = "http://127.0.0.1:5501/ControlAmbientes/Front/interfaces/login.html";
   }
 }
 
 function closeSession(){
   sessionStorage.clear();
-  location.href = "http://localhost:8080/interfaces/login.html";
+  location.href = "http://127.0.0.1:5501/ControlAmbientes/Front/interfaces/login.html";
 }
 
 function getSession(){
-  fetch(url + "getSession", {
+  fetch(url + "users", {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
