@@ -2,6 +2,7 @@ const express = require('express');
 const user = require('../controllers/users');
 const login = require('../controllers/login');
 const roles = require('../controllers/roles');
+const vitacora = require('../controllers/vitacora');
 const bloques = require('../controllers/bloques');
 const ambientes = require('../controllers/ambientes');
 const inventarios = require('../controllers/inventario');
@@ -29,6 +30,11 @@ app.delete('/users/:id', user.deleteUser);
 //Roles
 app.get('/roles', roles.getRoles);
 
+// vitacora
+app.get('/vitacora', vitacora.getVitacoras);
+app.post('/vitacora', vitacora.createVitacora);
+app.patch('/vitacora/:id', vitacora.updateVitacora);
+app.delete('/vitacora/:id', vitacora.deleteVitacora);
 
 // BLoques
 app.get('/bloques', bloques.getBloques);
